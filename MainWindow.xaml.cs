@@ -23,14 +23,15 @@ namespace ProcessViewer
         private void LoadProcesses()
         {
             var processes = Process.GetProcesses()
-                .Select(p => new
+                .Select(p => new ProcessInfo
                 {
-                    p.ProcessName,
-                    p.Id,
+                    ProcessName = p.ProcessName,
+                    Id = p.Id,
                     MemoryUsage = $"{p.WorkingSet64 / 1024 / 1024} MB"
                 }).ToList();
             ProcessListView.ItemsSource = processes;
         }
+
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
@@ -47,5 +48,7 @@ namespace ProcessViewer
                 detailsWindow.Show();
             }
         }
+
+
     }
 }
